@@ -1,0 +1,14 @@
+Recieved code : na1-db15-cb22-4f6f-977a-b28fe54c9a4a
+
+curl --request POST \
+  --url https://api.hubapi.com/oauth/v1/token \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'grant_type=authorization_code&code=<code>&redirect_uri=http://localhost:9090&client_id=<client_id>&client_secret=<client_secret>'
+
+curl --request POST \
+  --url https://api.hubapi.com/oauth/v1/token \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'grant_type=authorization_code&code=na1-19f8-b421-4268-a6a6-1ca5f4b51037&redirect_uri=http://localhost:8080&client_id=37d09df7-e2e7-417f-8a7a-8b9b646a0250&client_secret=baf43380-a6e1-454d-aa0a-da18cebda3fe'
+
+{"token_type":"bearer","refresh_token":"na1-2cae-1dc2-4786-89f4-1c5f141cded5","access_token":"CNDpqOq9MhIUAAEDAAAAwAAEAAAAAAAAAAAAAAQYw8GWFyCkjPojKJSK4QIyFNb2G4kIaa-cxvAWLUGfuacCiwkHOkAAAABBAAAAAMD_AwAAAAAAAAAAAAAAAAAADAAAAIgAMAAAABAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAOABAAAMQhS9luDzq0gMXp1KT0WzmqpSmBAlSUoDbmExUgBaAGAA","expires_in":1800}
+CKbnjIK-MhIUAAEDAAAAwAAEAEAAAAAAAAAAAAQYw8GWFyCkjPojKJSK4QIyFGZvq2zdACp7gSwCO-12SM0LIpqjOkAAAABBAAAAAMD_AwAAAAAAAAAAAAAAAAAADAAAAIgAMAAAABAAABgEAAAAAAAAAAAAAAAAAAAAAAAAAOABAAAsQhQ6SCm8I27tHFOZBVh_VM8-4-aZf0oDbmExUgBaAGAA
