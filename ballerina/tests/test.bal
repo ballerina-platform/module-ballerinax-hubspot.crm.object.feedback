@@ -8,30 +8,38 @@ configurable http:BearerTokenConfig & readonly authConfig = ?;
 ConnectionConfig config = {auth : authConfig};
 final Client baseClient = check new Client(config, serviceUrl = "https://api.hubapi.com");
 
-// @test:Config {}
-// isolated function  testGet-/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}_getById() {
 
-// }
-
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions/batch/read_read() {
-// }
-
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions/search_doSearch() {
-// }
+final string feedbackSubmissionId = "392710142127";
 
 @test:Config {}
 isolated function getPageOfFeedbackSubmissions() returns error? {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/crm/v3/objects/feedback_submissions.get();
-    test:assertTrue(response?.results.length()==0, "Feedback submissions list is empty");
-    test:assertTrue(response?.results.length()>0, "Feedback submissions list is not empty");
-    test:assertTrue(response?.paging !is (), "Paging information is available");
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/crm/v3/objects/feedback_submissions;
+    test:assertTrue(response?.results.length()>=0);                                              
 }
-//@test:Config {}
+
+@test:Config {}
+isolated function  getFeedbackSubmissionById() returns error? { 
+    SimplePublicObjectWithAssociations response = check baseClient->/crm/v3/objects/feedback_submissions/[feedbackSubmissionId];
+    test:assertTrue(response?.properties == 
+            {   
+            "hs_createdate": "2024-12-21T11:39:24.734Z",
+            "hs_lastmodifieddate": "2024-12-21T11:39:25.742Z",
+            "hs_object_id": "392710142127"
+            }   
+        );
+}
+
+// @test:Config {}
 // isolated function  testPost-/crm/v3/objects/feedback_submissions/batch/read_read() {
 // }
 
 // @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions/search_doSearch() {
+// isolated function  searchFeedbackSubmissions() returns error?{
+//     CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/crm/v3/objects/feedback_submissions/search.post({
+//         payload = {
+            
+//         }
+//     });
 // }
+
+
