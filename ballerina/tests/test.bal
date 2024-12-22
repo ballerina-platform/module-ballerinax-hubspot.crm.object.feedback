@@ -3,7 +3,6 @@
 
 import ballerina/http;
 import ballerina/test;
-import ballerina/io;
 
 configurable http:BearerTokenConfig & readonly authConfig = ?;
 ConnectionConfig config = {auth : authConfig};
@@ -11,12 +10,12 @@ final Client baseClient = check new Client(config, serviceUrl = "https://api.hub
 
 
 final string testFeedbackSubmissionId = "392813793683";
+final string testFeedbackProperty = "this_is_for_testing_purpose_";
 
 @test:Config {}
 isolated function getPageOfFeedbackSubmissions() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/crm/v3/objects/feedback_submissions;
-    test:assertTrue(response?.results.length()>=0); 
-    io:println("Retrieved feedback submissions: " ,response?.results.length());                                             
+    test:assertTrue(response?.results.length()>=0);                                          
 }
 
 @test:Config {}
@@ -29,20 +28,54 @@ isolated function  getFeedbackSubmissionById() returns error? {
                 "hs_object_id": "392813793683"
             }   
         );
-    io:println("Requested feedback submission: " ,response?.properties);
 }
 
 @test:Config {}
 isolated function  searchFeedbackSubmissions() returns error?{
-    CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/crm/v3/objects/feedback_submissions/search.post({
+    CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/crm/v3/objects/feedback_submissions/search.post(
         payload = {
-            
+            "filterGroups": [
+                {"filters": [
+                    {
+                    "propertyName": "hs_createdate",
+                    "value": "2024-12-22T07:26:59.374Z",
+                    "operator": "EQ"
+                    }
+                ]}],
+            "limit": 3
         }
-    });
+    );
+    test:assertTrue(response?.results.length() <= 3);      
 }
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions/batch/read_read() {
-// }
+
+
+@test:Config {}
+isolated function  readBacthOfFeedback() returns error?{
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check baseClient->/crm/v3/objects/feedback_submissions/batch/read.post(
+        payload = {
+            "propertiesWithHistory": [
+                testFeedbackProperty
+            ],
+            "inputs": [
+                {
+                "id": testFeedbackSubmissionId
+                }
+            ],
+            "properties": [
+                testFeedbackProperty
+            ]
+        }
+    );
+
+    test:assertTrue(response?.status == "COMPLETE");
+    test:assertEquals(response?.results[0].properties,
+        {
+            "hs_createdate": "2024-12-22T07:28:21.099Z",
+            "hs_lastmodifieddate": "2024-12-22T07:28:21.328Z",
+            "hs_object_id": "392813793683",
+            "this_is_for_testing_purpose_": "2"
+        });   
+}
 
 
 
