@@ -3,12 +3,6 @@
 
 import ballerina/http;
 
-OAuth2RefreshTokenGrantConfig auth = {
-    clientId: "78ffb461-3469-4946-a06c-3171f1dd2c70",
-    clientSecret: "ad3b8787-2e87-420b-b62a-499cda664ffe",
-    refreshToken: "na1-bd0b-9136-4275-b44b-fffd120a4ea4"
-};
-
 public isolated client class Client {
     final http:Client clientEp;
     final readonly & ApiKeysConfig? apiKeyConfig;
