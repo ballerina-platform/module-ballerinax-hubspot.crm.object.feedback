@@ -236,6 +236,9 @@ dependencies = [
 	{org = "ballerina", name = "time"},
 	{org = "ballerina", name = "url"}
 ]
+modules = [
+	{org = "ballerina", packageName = "oauth2", moduleName = "oauth2"}
+]
 
 [[package]]
 org = "ballerina"
@@ -314,6 +317,7 @@ name = "hubspot.crm.object.feedback"
 version = "0.1.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "oauth2"},
 	{org = "ballerina", name = "test"},
 	{org = "ballerina", name = "url"},
 	{org = "ballerinai", name = "observe"}
