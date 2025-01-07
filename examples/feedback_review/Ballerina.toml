@@ -1,0 +1,14 @@
+[package]
+org = "irash"
+name = "feedback_submission"
+version = "0.1.0"
+distribution = "2201.10.3"
+
+[build-options]
+observabilityIncluded = true
+
+[[dependency]]
+org="ballerinax"
+name="hubspot.crm.obj.feedback"
+version="0.1.0"
+repository="local"
