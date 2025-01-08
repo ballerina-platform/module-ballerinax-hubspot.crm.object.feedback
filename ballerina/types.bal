@@ -309,10 +309,6 @@ public type ClientHttp1Settings record {|
     ProxyConfig proxy?;
 |};
 
-public type BatchInputSimplePublicObjectBatchInput record {
-    SimplePublicObjectBatchInput[] inputs;
-};
-
 public type BatchInputSimplePublicObjectInputForCreate record {
     SimplePublicObjectInputForCreate[] inputs;
 };
@@ -320,6 +316,10 @@ public type BatchInputSimplePublicObjectInputForCreate record {
 public type PreviousPage record {
     string before;
     string link?;
+};
+
+public type BatchInputSimplePublicObjectBatchInput record {
+    SimplePublicObjectBatchInput[] inputs;
 };
 
 public type SimplePublicUpsertObject record {
