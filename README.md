@@ -12,11 +12,9 @@
 
 The `ballerinax/hubspot.crm.object.feedback` offers APIs to connect and interact with the [HubSpot Feedback Submission API](https://developers.hubspot.com/docs/reference/api/crm/objects/feedback-submissions) endpoints, specifically based on the [HubSpot API v3](https://developers.hubspot.com/docs/reference/api).
 
-> **_NOTE:_**
-> This package may be changed in the future based on the HubSpot API changes, since it is currently under development and is subject to change based on testing and feedback. By using this package, you are agreeing to accept any future changes that might occur and understand the risk associated with testing an unstable API.
-> Refer to the [HubSpot Developer Terms](https://legal.hubspot.com/developer-terms?_gl=1*fmuxuh*_ga*NDU4NDIxOTA5LjE3MzQ3ODM3Mjg.*_ga_LXTM6CQ0XK*MTczNDgwNjI1OS4yLjAuMTczNDgwNjI1OS42MC4wLjA.&_ga=2.66923502.174841559.1734639641-983296813.1734639641) & [Developer Beta Terms](https://legal.hubspot.com/developerbetaterms?_gl=1*fmuxuh*_ga*NDU4NDIxOTA5LjE3MzQ3ODM3Mjg.*_ga_LXTM6CQ0XK*MTczNDgwNjI1OS4yLjAuMTczNDgwNjI1OS42MC4wLjA.&_ga=2.66923502.174841559.1734639641-983296813.1734639641) for more information.
+> **Note:** This package may be changed in the future based on the HubSpot API changes, since it is currently under development and is subject to change based on testing and feedback. By using this package, you are agreeing to accept any future changes that might occur and understand the risk associated with testing an unstable API. Refer to the [HubSpot Developer Terms](https://legal.hubspot.com/developer-terms) & [Developer Beta Terms](https://legal.hubspot.com/developerbetaterms) for more information.
 >
-> The feedback submissions endpoints are currently read only. Feedback submissions cannot be submitted or edited through the API. But following endpoints are available to view feedback submissions.
+> The feedback submissions endpoints are currently read only. Feedback submissions cannot be submitted or edited through the API.
 >
 > ```
 > GET https://api.hubapi.com/crm/v3/objects/feedback_submissions
