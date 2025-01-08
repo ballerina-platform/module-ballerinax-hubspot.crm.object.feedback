@@ -1,0 +1,81 @@
+import ballerina/test;
+import ballerina/http;
+
+final Client mockClient = check new Client(config, serviceUrl = "http://localhost:9090");
+
+final string mockTestFeedbackSubmissionId = "512";
+
+@test:Config{}
+isolated function createFeedbackSubmission() returns error?{
+    SimplePublicObject response = check mockClient->/crm/v3/objects/feedback_submissions.post(
+        payload = {
+            associations: [],
+            properties: {
+                "hs_content": "What a great product!",
+                "hs_ingestion_id": "fd61286d-102b-4fcc-b486-3486b4ceafc2",
+                "hs_response_group": "PROMOTER",
+                "hs_submission_name": "Customer Satisfaction Survey - bcooper@biglytics.net",
+                "hs_survey_channel": "EMAIL",
+                "hs_survey_id": "5",
+                "hs_survey_name": "Customer Satisfaction Survey",
+                "hs_survey_type": "CSAT",
+                "hs_value": "2"
+            }
+        }
+    );
+
+    test:assertEquals(response,{
+        "id": "512",
+        "properties": {
+            "hs_content": "What a great product!",
+            "hs_ingestion_id": "fd61286d-102b-4fcc-b486-3486b4ceafc2",
+            "hs_response_group": "PROMOTER",
+            "hs_submission_name": "Customer Satisfaction Survey - bcooper@biglytics.net",
+            "hs_survey_channel": "EMAIL",
+            "hs_survey_id": "5",
+            "hs_survey_name": "Customer Satisfaction Survey",
+            "hs_survey_type": "CSAT",
+            "hs_value": "2"
+        },
+        "createdAt": "2019-10-30T03:30:17.883Z",
+        "updatedAt": "2019-12-07T16:50:06.678Z",
+        "archived": false
+    });
+}
+
+@test:Config{}
+isolated function updateFeedbackSubmission() returns error?{
+    SimplePublicObject response = check mockClient->/crm/v3/objects/feedback_submissions/[mockTestFeedbackSubmissionId].patch(
+        payload = {
+            properties: {
+                "hs_content": "Wow! This is awesome!"
+            }
+        }
+    );
+
+    test:assertEquals(response,{
+        "id": "512",
+        "properties": {
+            "hs_content": "Wow! This is awesome!",
+            "hs_ingestion_id": "fd61286d-102b-4fcc-b486-3486b4ceafc2",
+            "hs_response_group": "PROMOTER",
+            "hs_submission_name": "Customer Satisfaction Survey - bcooper@biglytics.net",
+            "hs_survey_channel": "EMAIL",
+            "hs_survey_id": "5",
+            "hs_survey_name": "Customer Satisfaction Survey",
+            "hs_survey_type": "CSAT",
+            "hs_value": "2"
+        },
+        "createdAt": "2019-10-30T03:30:17.883Z",
+        "updatedAt": "2019-12-07T16:50:06.678Z",
+        "archived": false
+    });
+}
+
+@test:Config{}
+isolated function deleteFeedbackSubmission() returns error?{
+    http:Response response = check mockClient->/crm/v3/objects/feedback_submissions/[mockTestFeedbackSubmissionId].delete();
+
+    test:assertEquals(response.getTextPayload(), "Successfully deleted");
+    test:assertEquals(response.statusCode, 204);
+}

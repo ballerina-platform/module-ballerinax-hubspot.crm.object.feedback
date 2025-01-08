@@ -10,7 +10,6 @@ configurable string & readonly clientId = ?;
 configurable string & readonly clientSecret = ?;
 configurable string & readonly refreshToken = ?;
 
-
 OAuth2RefreshTokenGrantConfig authConfig = {
     clientId: clientId,
     clientSecret: clientSecret,
@@ -19,8 +18,7 @@ OAuth2RefreshTokenGrantConfig authConfig = {
 };
 
 ConnectionConfig config = {auth : authConfig};
-final Client baseClient = check new Client(config, serviceUrl = "https://api.hubapi.com");
-
+final Client baseClient = check new Client(config);
 final string testFeedbackSubmissionId = "392813793683";
 final string testFeedbackProperty = "this_is_for_testing_purpose_";
 
@@ -88,6 +86,10 @@ isolated function  readBacthOfFeedback() returns error?{
             "this_is_for_testing_purpose_": "2"
         });   
 }
+
+// Test cases which are tested in the mock service
+
+
 
 // @test:Config {}
 // isolated function  testPost-/crm/v3/objects/feedback_submissions/batch/upsert() {
