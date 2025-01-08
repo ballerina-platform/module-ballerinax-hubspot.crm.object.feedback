@@ -4,10 +4,9 @@ The `ballerinax/hubspot.crm.object.feedback` connector provides practical exampl
 
 ## Prerequisites
 
-- **Ballerina**Download and install Ballerina from [here](https://ballerina.io/downloads/).
-- **HubSpot developer account**Create a HubSpot developer account and create an app to obtain the necessary credentials. Refer to the [Setup Guide](../ballerina/Package.md) for instructions.
-- **`hubspot.crm.object.feedback` module**
-  Import the `ballerinax/hubspot.crm.object.feedback` module into your Ballerina project and configure it with the obtained credentials. Refer to the [Config.toml.template](./feedback_review/Config.toml.template) file for creating the `Config.toml` file.
+- **Ballerina:** Download and install Ballerina from [here](https://ballerina.io/downloads/).
+- **HubSpot developer account:** Create a HubSpot developer account and create an app to obtain the necessary credentials. Refer to the [Setup Guide](../ballerina/Package.md) for instructions.
+- **`hubspot.crm.object.feedback` module:** Import the `ballerinax/hubspot.crm.object.feedback` module into your Ballerina project and configure it with the obtained credentials. Refer to the [Config.toml.template](./feedback_review/Config.toml.template) file for creating the `Config.toml` file.
 
 ```
 import ballerinax/hubspot.crm.obj.feedback as feedback;

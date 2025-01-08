@@ -15,13 +15,6 @@ The `ballerinax/hubspot.crm.object.feedback` offers APIs to connect and interact
 > **Note:** This package may be changed in the future based on the HubSpot API changes, since it is currently under development and is subject to change based on testing and feedback. By using this package, you are agreeing to accept any future changes that might occur and understand the risk associated with testing an unstable API. Refer to the [HubSpot Developer Terms](https://legal.hubspot.com/developer-terms) & [Developer Beta Terms](https://legal.hubspot.com/developerbetaterms) for more information.
 >
 > The feedback submissions endpoints are currently read only. Feedback submissions cannot be submitted or edited through the API.
->
-> ```
-> GET https://api.hubapi.com/crm/v3/objects/feedback_submissions
-> GET https://api.hubapi.com/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}
-> POST https://api.hubapi.com/crm/v3/objects/feedback_submissions/batch/read
-> POST https://api.hubapi.com/crm/v3/objects/feedback_submissions/search
-> ```
 
 ## Setup guide
 
@@ -37,38 +30,35 @@ If you don't have a HubSpot Developer Account you can sign up to a free account 
 
 Within app developer accounts, you can create developer test accounts to test apps and integrations without affecting any real HubSpot data.
 
-**_These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts._**
+> **Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
 
-1. Go to Test accounts section from the left sidebar.
-   <img src="./docs/resources/test-account.png" style="width: 70%;">
+### Step 2 (Optional): Create a Developer Test Account
+
+1. Go to the Test accounts section from the left sidebar.
+   ![Test accounts section](./docs/resources/test-account.png)
+
 2. Click on the `Create developer test account` button on the top right corner.
+   ![Create developer test account](./docs/resources/create-test-account.png)
 
-   <img src="./docs/resources/create-test-account.png" style="width: 70%;">
 3. In the pop-up window, provide a name for the test account and click on the `Create` button.
-
-   <img src="./docs/resources/create-account.png" style="width: 70%;">
-4. You will see the newly created test account in the list of test accounts.
-
-   <img src="./docs/resources/test-account-portal.png" style="width: 70%">
+   ![Create test account](./docs/resources/create-account.png)
+   You will see the newly created test account in the list of test accounts.
+   ![Test account portal](./docs/resources/test-account-portal.png)
 
 ### Step 3: Create a HubSpot App
 
 1. Now navigate to the `Apps` section from the left sidebar and click on the `Create app` button on the top right corner.
+   ![Create app](./docs/resources/create-app.png)
 
-   <img src="./docs/resources/create-app.png" width="70%">
 2. Provide a public app name and description for your app.
-
-   <img src="./docs/resources/app-name-desc.png" width="70%">
+   ![App name and description](./docs/resources/app-name-desc.png)
 
 ### Step 4: Setup Authentication
 
 1. Move to the `Auth` tab.
+   ![Configure authentication](./docs/resources/config-auth.png)
 
-   <img src="./docs/resources/config-auth.png" width="70%">
 2. In the `Scopes` section, add the following scopes for your app using the `Add new scopes` button.
-
-   <img src="./docs/resources/add-scopes.png" width="70%">
-
    - `e-commerce`
    - `tickets`
    - `crm.objects.goals.read`
@@ -77,17 +67,16 @@ Within app developer accounts, you can create developer test accounts to test ap
    - `crm.objects.custom.write`
    - `crm.objects.feedback_submissions.read`
 
-   <img src="./docs/resources/add-scopes.png" width="70%">
+   ![Add scopes](./docs/resources/add-scopes.png)
 
-3. In the `Redirect URL` section, add the redirect URL for your app. This is the URL where the user will be redirected after the authentication process. You can use localhost for testing purposes. Then hit the `Create App` button.
+3. In the `Redirect URL` section, add the redirect URL for your app. This is the URL where the user will be redirected after the authentication process. You can use `localhost` for testing purposes. Then click the `Create App` button.
 
-   <img src="./docs/resources/redirect-url.png" width="70%">
+   ![Redirect URL](./docs/resources/redirect-url.png)
 
 ### Step 5: Get the Client ID and Client Secret
 
 Navigate to the `Auth` tab and you will see the `Client ID` and `Client Secret` for your app. Make sure to save these values.
-
-   <img src="./docs/resources/client-id-secret.png" width="70%">
+![Client ID and Client Secret](./docs/resources/client-id-secret.png)
 
 ### Step 6: Setup Authentication Flow
 
@@ -101,13 +90,10 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
 2. Paste it in the browser and select your developer test account to intall the app when prompted.
+   !![Account select](./docs/resources/account-select.png)
 
-   <img src="./docs/resources/account-select.png" style="width: 70%;">
 3. A code will be displayed in the browser. Copy the code.
 
-   ```
-   Received code: na1-129d-860c-xxxx-xxxx-xxxxxxxxxxxx
-   ```
 4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
 
    - Linux/macOS
@@ -153,7 +139,7 @@ import ballerinax/hubspot.crm.obj.feedback;
 
 ### Step 2: Provide the required configurations
 
-Create a `Config.toml` file where your `.bal` file is located and provide the following configurations:
+Create a `Config.toml` file in your Ballerina package directory and provide the following configurations:
 
 ```
 clientId = "<CLIENT_ID>"
@@ -166,7 +152,7 @@ refreshToken = "<REFRESH_TOKEN>"
 Initialize the Hubspot CRM Feedback Submission client by passing the configurations to the `main` function.
 
 ```
-public function main() returns error?{
+public function main() returns error? {
     feedback:ConnectionConfig config = {
         auth: {
             clientId: clientId,
@@ -176,7 +162,7 @@ public function main() returns error?{
         }
     };
 
-    final feedback:Client baseClient = check new feedback:Client(config, serviceUrl = "https://api.hubapi.com/crm/v3/objects"); 
+    final feedback:Client baseClient = check new feedback:Client(config); 
 }
 ```
 
@@ -186,11 +172,8 @@ You can view all feedback submissions by calling the `feedback_submissions` endp
 
 ```
     feedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check baseClient->/feedback_submissions;
-    io:println("All feedback submissions: ");
-    io:println(allFeedbackSubmissions);
+    io:println("All feedback submissions: ", allFeedbackSubmissions);
 ```
-
-Refer more examples [here](./../examples/feedback_review/main.bal)
 
 ### Step 5: Run the Ballerina file
 
@@ -203,6 +186,70 @@ bal run
 ## Examples
 
 The `HubSpot CRM Feedback` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.crm.object.feedback/tree/main/examples/), covering the following use cases:
+   1. Read a page of feedback submissions.
+   2. Read an Object identified by `{feedbackSubmissionId}`
+   3. Read a batch of feedback submissions by internal ID, or unique property values
+   4. Search feedback submissions
+
+### Prerequisites
+
+- **Ballerina:** Download and install Ballerina from [here](https://ballerina.io/downloads/).
+- **HubSpot developer account:** Create a HubSpot developer account and create an app to obtain the necessary credentials. Refer to the [Setup Guide](../ballerina/Package.md) for instructions.
+- **`hubspot.crm.object.feedback` module:** Import the `ballerinax/hubspot.crm.object.feedback` module into your Ballerina project and configure it with the obtained credentials. Refer to the [Config.toml.template](./feedback_review/Config.toml.template) file for creating the `Config.toml` file.
+
+```
+import ballerinax/hubspot.crm.obj.feedback as feedback;
+
+configurable string & readonly clientId = ?;
+configurable string & readonly clientSecret = ?;
+configurable string & readonly refreshToken = ?;
+
+public function main() returns error?{
+      feedback:ConnectionConfig config = {
+         auth: {
+            clientId: clientId,
+            clientSecret: clientSecret,
+            refreshToken: refreshToken,
+            credentialBearer: oauth2:POST_BODY_BEARER
+         }
+      };
+
+      final feedback:Client baseClient = check new feedback:Client(config, serviceUrl);
+}
+```
+
+### Running an example
+
+Execute the following commands to build an example from the source:
+
+* To build an example:
+
+   ```bash
+   bal build
+   ```
+* To run an example:
+
+   ```bash
+   bal run
+   ```
+
+### Building the examples with the local module
+
+**Warning**: Due to the absence of support for reading local repositories for single Ballerina files, the Bala of the module is manually written to the central repository as a workaround. Consequently, the bash script may modify your local Ballerina repositories.
+
+Execute the following commands to build all the examples against the changes you have made to the module locally:
+
+* To build all the examples:
+
+   ```bash
+   ./build.sh build
+   ```
+* To run all the examples:
+
+   ```bash
+   ./build.sh run
+   ```
+
 
 ## Build from the source
 
@@ -288,6 +335,3 @@ All the contributors are encouraged to read the [Ballerina Code of Conduct](http
 * For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 * Chat live with us via our [Discord server](https://discord.gg/ballerinalang).
 * Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
-
-[//]: #
-[//]: #
