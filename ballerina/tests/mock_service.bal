@@ -4,11 +4,7 @@ import ballerina/log;
 listener http:Listener httpListener = new(9090);
 
 http:Service mockService = service object {
-    # Create new feedback submission
-    #
-    # + return - successful operation 
-    # http:Ok (The request was successful)
-    # http:Response (The request was failed)
+    // Create feedback submission
     resource function post crm/v3/objects/feedback_submissions(@http:Payload SimplePublicObjectInputForCreate payload) returns SimplePublicObject|error{
         return {
             "id": "512",
@@ -29,11 +25,7 @@ http:Service mockService = service object {
         };
     }
 
-    # Update feedback submission
-    # 
-    # + return - succesfull operation
-    # http:Ok (The request was successful)
-    # http:Response (The request was failed)
+    // Update feedback submission
     resource function patch crm/v3/objects/feedback_submissions/[string feedbackSubmissionId](@http:Payload SimplePublicObjectInput payload) returns SimplePublicObject|error {
         return{
             "id": "512",
@@ -54,11 +46,7 @@ http:Service mockService = service object {
             };
     }
 
-    # Delete a feedback submission
-    # 
-    # + return - successful operation
-    # http:Ok (The request was successful)
-    # http:Response (The request was failed)
+    // Delete a feedback submission
     resource function delete crm/v3/objects/feedback_submissions/[string feedbackSubmissionId]() returns http:Response|error {
         http:Response response = new;
         response.statusCode = 204;

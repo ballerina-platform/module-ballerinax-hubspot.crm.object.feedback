@@ -9,7 +9,6 @@ import ballerina/oauth2;
 configurable string & readonly clientId = ?;
 configurable string & readonly clientSecret = ?;
 configurable string & readonly refreshToken = ?;
-
 OAuth2RefreshTokenGrantConfig authConfig = {
     clientId: clientId,
     clientSecret: clientSecret,
@@ -31,7 +30,7 @@ isolated function getPageOfFeedbackSubmissions() returns error? {
 @test:Config {}
 isolated function  getFeedbackSubmissionById() returns error? { 
     SimplePublicObjectWithAssociations response = check baseClient->/crm/v3/objects/feedback_submissions/[testFeedbackSubmissionId];
-    test:assertTrue(response?.properties == 
+    test:assertEquals(response?.properties,
             {   
                 "hs_createdate": "2024-12-22T07:28:21.099Z",
                 "hs_lastmodifieddate": "2024-12-22T07:28:21.328Z",
@@ -86,38 +85,3 @@ isolated function  readBacthOfFeedback() returns error?{
             "this_is_for_testing_purpose_": "2"
         });   
 }
-
-// Test cases which are tested in the mock service
-
-
-
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions/batch/upsert() {
-// }
-
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions/batch/update() {
-// }
-
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions/batch/create() {
-// }
-
-// @test:Config {}
-// isolated function  testPatch-/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}() {
-// }
-
-// @test:Config {}
-// isolated function  testDelete-/crm/v3/objects/feedback_submissions/{feedbackSubmissionId}() {
-// }
-
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions/batch/archive() {
-// }
-
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/feedback_submissions() {
-// }
-
-
-

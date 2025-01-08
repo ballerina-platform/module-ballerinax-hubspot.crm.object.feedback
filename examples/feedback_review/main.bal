@@ -17,20 +17,20 @@ public function main() returns error?{
         }
     };
 
-    final feedback:Client baseClient = check new feedback:Client(config, serviceUrl = "https://api.hubapi.com/crm/v3/objects"); 
-    io:println(baseClient);
-    io:println("Client created successfully");
+    final feedback:Client baseClient = check new feedback:Client(config); 
 
     // Search for feedback submissions
     feedback:PublicObjectSearchRequest searchRequest = {
         filterGroups: [
-            {"filters": [
+            {
+                "filters": [
                     {
                     "propertyName": "hs_createdate",
                     "value": "2024-12-22T07:26:59.374Z",
                     "operator": "EQ"
                     }
-            ]}
+                ]
+            }
         ]
     };
 
