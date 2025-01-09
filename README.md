@@ -90,7 +90,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
 2. Paste it in the browser and select your developer test account to intall the app when prompted.
-   !![Account select](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/account-select.png)
+   ![Account select](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/account-select.png)
 
 3. A code will be displayed in the browser. Copy the code.
 
@@ -134,7 +134,7 @@ To use the `Hubspot CRM Feedback Submission` connector in your Ballerina applica
 Import the `hubspot.crm.obj.feedback` module and `oauth2` module.
 
 ```ballerina
-import ballerinax/hubspot.crm.obj.feedback as feedback;
+import ballerinax/hubspot.crm.obj.feedback as hsfeedback;
 import ballerina/oauth2;
 ```
 
@@ -148,14 +148,14 @@ import ballerina/oauth2;
     refreshToken = <Refresh Token>
    ```
 
-2. Instantiate a `feedback:ConnectionConfig` with the obtained credentials and initialize the connector with it.
+2. Instantiate a `hsfeedback:ConnectionConfig` with the obtained credentials and initialize the connector with it.
 
     ```ballerina
     configurable string clientId = ?;
     configurable string clientSecret = ?;
     configurable string refreshToken = ?;
 
-    feedback:ConnectionConfig config = {
+    hsfeedback:ConnectionConfig config = {
         auth: {
             clientId,
             clientSecret,
@@ -164,7 +164,7 @@ import ballerina/oauth2;
         }
     };
 
-    final feedback:Client baseClient = check new feedback:Client(config);
+    final hsfeedback:Client baseClient = check new (config);
     ```
 
 ### Step 3: Invoke the connector operation
@@ -186,7 +186,7 @@ The `HubSpot CRM Feedback` connector provides practical examples illustrating us
 
 [Feedback Reviewing](https://github.com/module-ballerinax-hubspot.crm.object.feedback/tree/main/examples/) - This example demonstrates the usage of the HubSpot CRM Feedback connector to read a page of feedback submissions, read an object identified by `{feedbackSubmissionId}`, read a batch of feedback submissions by internal ID, or unique property values, and search feedback submissions.
 
-> **Note**: The feedback submissions endpoints are currently read only. Feedback submissions cannot be submitted or edited through the API. You can only create properties in the [feedback surveys tool within HubSpot](https://knowledge.hubspot.com/customer-feedback/create-a-custom-survey?_gl=1*1h5ce0o*_ga*MzIyODQzMTUyLjE3MzYzNjE3OTU.*_ga_LXTM6CQ0XK*MTczNjQwNjg4NS4zLjEuMTczNjQwNjg5OS40Ni4wLjA.&_ga=2.97072604.213367396.1736361795-322843152.1736361795#survey), and the properties cannot be edited after creation.
+> **Note**: The feedback submissions endpoints are currently read only. Feedback submissions cannot be submitted or edited through the API. You can only create properties in the [feedback surveys tool within HubSpot](https://knowledge.hubspot.com/customer-feedback/create-a-custom-survey), and the properties cannot be edited after creation.
 
 ## Build from the source
 
