@@ -17,7 +17,6 @@
 import ballerina/test;
 import ballerina/oauth2;
 
-// configurable http:BearerTokenConfig & readonly authConfig = ?;
 configurable string & readonly clientId = ?;
 configurable string & readonly clientSecret = ?;
 configurable string & readonly refreshToken = ?;
