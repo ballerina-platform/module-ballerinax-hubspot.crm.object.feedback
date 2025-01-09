@@ -36,6 +36,7 @@ final hsfeedback:Client baseClient = check new (config);
 
 public function main() returns error?{
     // Search for feedback submissions
+    // In this scenario, we are searching for feedback submissions with a creation date of 2024-12-22T07:26:59.374Z
     hsfeedback:PublicObjectSearchRequest searchRequest = {
         filterGroups: [
             {
@@ -54,28 +55,37 @@ public function main() returns error?{
     io:println("Feedback submissions found: ");
     io:println(response);
 
-    // Get all feedback submissions
-    hsfeedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check baseClient->/feedback_submissions;
+    // Get a page of feedback submissions
+    // Here, we have set the maximum number of feedback submissions to be retrieved per page to 2.
+    // Also, the paging cursor token of the last successfully read resource will be returned as the paging.next.after JSON property of a paged response containing more results.
+    hsfeedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check baseClient->/feedback_submissions('limit = 2);
     io:println("All feedback submissions: ");
     io:println(allFeedbackSubmissions);
 
     // Get a feedback submission by ID
-    hsfeedback:SimplePublicObjectWithAssociations feedbackSubmissionById = check baseClient->/feedback_submissions/["392813793683"];
+    // {feedbackSubmissionId} refers to the internal object ID by default, or optionally any unique property value as specified by the idProperty query param. 
+    // Control what is returned via the properties query param.
+    hsfeedback:SimplePublicObjectWithAssociations feedbackSubmissionId = check baseClient->/feedback_submissions/["392813793683"];
     io:println("Feedback submission by ID: ");
-    io:println(feedbackSubmissionById);
+    io:println(feedbackSubmissionId);
 
     // Read batch of feedback submissions
+    // This operation is used to read multiple feedback submissions in a single call.
+    // You can give a list of feedback submission IDs to read and specify the properties and propertiesWithHistory to be returned.
     hsfeedback:BatchReadInputSimplePublicObjectId batchReadInput = {
         propertiesWithHistory: [
             "testFeedbackProperty"
         ],
         inputs: [
             {
-            "id": "testFeedbackSubmissionId"
+                "id": "392813793683"
+            },
+            {
+                "id": "392814365797"
             }
         ],
         properties: [
-            "testFeedbackProperty"
+            "this_is_for_testing_purpose_"
         ]
     };
 
