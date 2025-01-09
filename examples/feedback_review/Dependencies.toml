@@ -299,7 +299,7 @@ modules = [
 ]
 
 [[package]]
-org = "irash"
+org = "wso2"
 name = "feedback_submission"
 version = "0.1.0"
 dependencies = [
@@ -309,6 +309,6 @@ dependencies = [
 	{org = "ballerinax", name = "hubspot.crm.obj.feedback"}
 ]
 modules = [
-	{org = "irash", packageName = "feedback_submission", moduleName = "feedback_submission"}
+	{org = "wso2", packageName = "feedback_submission", moduleName = "feedback_submission"}
 ]
 

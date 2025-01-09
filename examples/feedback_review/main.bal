@@ -26,14 +26,14 @@ public function main() returns error?{
     // Create a new client using the provided configuration
     feedback:ConnectionConfig config = {
         auth: {
-            clientId: clientId,
-            clientSecret: clientSecret,
-            refreshToken: refreshToken,
+            clientId,
+            clientSecret,
+            refreshToken,
             credentialBearer: oauth2:POST_BODY_BEARER
         }
     };
 
-    final feedback:Client baseClient = check new feedback:Client(config); 
+    final feedback:Client baseClient = check new (config); 
 
     // Search for feedback submissions
     feedback:PublicObjectSearchRequest searchRequest = {
