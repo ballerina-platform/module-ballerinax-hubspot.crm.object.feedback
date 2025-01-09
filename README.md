@@ -175,7 +175,7 @@ Now, utilize the available connector operations. A sample usecase is shown below
     
 ```ballerina
 public function main() returns error? {
-   feedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging getPageOfFeedbackSubmissions = check baseClient->/feedback_submissions('limit = 10);
+   hsfeedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging getPageOfFeedbackSubmissions = check baseClient->/feedback_submissions('limit = 10);
    io:println("Feedback submissions: ", getPageOfFeedbackSubmissions);
 }
 ```
