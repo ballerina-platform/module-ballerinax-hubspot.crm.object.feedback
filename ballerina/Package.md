@@ -119,109 +119,67 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 ## Quickstart
 
-To use the `Hubspot CRM Feedback Submission` connector in your Ballerina project, follow the steps below and update the `.bal` file as follows.:
+To use the `Hubspot CRM Feedback Submission` connector in your Ballerina application, update the `.bal` file as follows:
 
-### Step 1: Import the Hubspot CRM Feedback Submission module
+### Step 1: Import the module
 
-Import the `ballerinax/hubspot.crm.obj.feedback` module into your Ballerina project.
+Import the `hubspot.crm.obj.feedback` module and `oauth2` module.
 
-```
-import ballerinax/hubspot.crm.obj.feedback;
-```
-
-### Step 2: Provide the required configurations
-
-Create a `Config.toml` file in your Ballerina package directory and provide the following configurations:
-
-```
-clientId = "<CLIENT_ID>"
-clientSecret = "<CLIENT_SECRET>"
-refreshToken = "<REFRESH_TOKEN>"
+```ballerina
+import ballerinax/hubspot.crm.obj.feedback as feedback;
+import ballerina/oauth2;
 ```
 
-### Step 3: Initialize the Hubspot CRM Feedback Submission Client
+### Step 2: Instantiate a new connector
 
-Initialize the Hubspot CRM Feedback Submission client by passing the configurations to the `main` function.
+1. Create a `Config.toml` file and, configure the obtained credentials in the above steps as follows:
 
-```
-public function main() returns error? {
+   ```toml
+    clientId = <Client Id>
+    clientSecret = <Client Secret>
+    refreshToken = <Refresh Token>
+   ```
+
+2. Instantiate a `feedback:ConnectionConfig` with the obtained credentials and initialize the connector with it.
+
+    ```ballerina
+    configurable string clientId = ?;
+    configurable string clientSecret = ?;
+    configurable string refreshToken = ?;
+
     feedback:ConnectionConfig config = {
         auth: {
-            clientId: clientId,
-            clientSecret: clientSecret,
-            refreshToken: refreshToken,
+            clientId,
+            clientSecret,
+            refreshToken,
             credentialBearer: oauth2:POST_BODY_BEARER
         }
     };
 
-    final feedback:Client baseClient = check new feedback:Client(config); 
+    final feedback:Client baseClient = check new feedback:Client(config);
+    ```
+
+### Step 3: Invoke the connector operation
+
+Now, utilize the available connector operations. A sample usecase is shown below.
+
+#### View Submitted Feedbacks
+    
+```ballerina
+public function main() returns error? {
+   feedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check baseClient->/feedback_submissions;
+   io:println("All feedback submissions: ", allFeedbackSubmissions);
 }
-```
-
-### Step 4 (Optional): Invoke the Hubspot CRM Feedback Submission API (View Feedback Submissions)
-
-You can view all feedback submissions by calling the `feedback_submissions` endpoint.
-
-```
-    feedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check baseClient->/feedback_submissions;
-    io:println("All feedback submissions: ", allFeedbackSubmissions);
-```
-
-### Step 5: Run the Ballerina file
-
-Use the following command to run the Ballerina file.
-
-```
-bal run
 ```
 
 ## Examples
 
-The `HubSpot CRM Feedback` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.crm.object.feedback/tree/main/examples/), covering the following use cases:
+The `HubSpot CRM Feedback` connector provides practical examples illustrating usage in various scenarios.
+
+Explore this [Feedback Reviewing Example](https://github.com/module-ballerinax-hubspot.crm.object.feedback/tree/main/examples/), covering the following use cases:
    1. Read a page of feedback submissions.
    2. Read an Object identified by `{feedbackSubmissionId}`
    3. Read a batch of feedback submissions by internal ID, or unique property values
    4. Search feedback submissions
 
-### Prerequisites
-
-- **Ballerina:** Download and install Ballerina from [here](https://ballerina.io/downloads/).
-- **HubSpot developer account:** Create a HubSpot developer account and create an app to obtain the necessary credentials. Refer to the [Setup Guide](../ballerina/Package.md) for instructions.
-- **`hubspot.crm.object.feedback` module:** Import the `ballerinax/hubspot.crm.object.feedback` module into your Ballerina project and configure it with the obtained credentials. Refer to the [Config.toml.template](./feedback_review/Config.toml.template) file for creating the `Config.toml` file.
-
-```
-import ballerinax/hubspot.crm.obj.feedback as feedback;
-
-configurable string & readonly clientId = ?;
-configurable string & readonly clientSecret = ?;
-configurable string & readonly refreshToken = ?;
-
-public function main() returns error?{
-      feedback:ConnectionConfig config = {
-         auth: {
-            clientId: clientId,
-            clientSecret: clientSecret,
-            refreshToken: refreshToken,
-            credentialBearer: oauth2:POST_BODY_BEARER
-         }
-      };
-
-      final feedback:Client baseClient = check new feedback:Client(config, serviceUrl);
-}
-```
-
-### Running an example
-
-Execute the following commands to build an example from the source:
-
-* To build an example:
-
-   ```bash
-   bal build
-   ```
-* To run an example:
-
-   ```bash
-   bal run
-   ```
-   
+> **Note**: The feedback submissions endpoints are currently read only. Feedback submissions cannot be submitted or edited through the API. You can only create properties in the [feedback surveys tool within HubSpot](https://knowledge.hubspot.com/customer-feedback/create-a-custom-survey?_gl=1*1h5ce0o*_ga*MzIyODQzMTUyLjE3MzYzNjE3OTU.*_ga_LXTM6CQ0XK*MTczNjQwNjg4NS4zLjEuMTczNjQwNjg5OS40Ni4wLjA.&_ga=2.97072604.213367396.1736361795-322843152.1736361795#survey), and the properties cannot be edited after creation.
