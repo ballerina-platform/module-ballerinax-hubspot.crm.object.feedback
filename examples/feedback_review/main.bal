@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerinax/hubspot.crm.obj.feedback as feedback;
+import ballerinax/hubspot.crm.obj.feedback as hsfeedback;
 import ballerina/oauth2;
 import ballerina/io;
 
@@ -22,21 +22,21 @@ configurable string & readonly clientId = ?;
 configurable string & readonly clientSecret = ?;
 configurable string & readonly refreshToken = ?;
 
+// Create a new client using the provided configuration
+hsfeedback:ConnectionConfig config = {
+    auth: {
+        clientId,
+        clientSecret,
+        refreshToken,
+        credentialBearer: oauth2:POST_BODY_BEARER
+    }
+};
+
+final hsfeedback:Client baseClient = check new (config);
+
 public function main() returns error?{
-    // Create a new client using the provided configuration
-    feedback:ConnectionConfig config = {
-        auth: {
-            clientId,
-            clientSecret,
-            refreshToken,
-            credentialBearer: oauth2:POST_BODY_BEARER
-        }
-    };
-
-    final feedback:Client baseClient = check new (config); 
-
     // Search for feedback submissions
-    feedback:PublicObjectSearchRequest searchRequest = {
+    hsfeedback:PublicObjectSearchRequest searchRequest = {
         filterGroups: [
             {
                 "filters": [
@@ -50,22 +50,22 @@ public function main() returns error?{
         ]
     };
 
-    feedback:CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/feedback_submissions/search.post(searchRequest);
+    hsfeedback:CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/feedback_submissions/search.post(searchRequest);
     io:println("Feedback submissions found: ");
     io:println(response);
 
     // Get all feedback submissions
-    feedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check baseClient->/feedback_submissions;
+    hsfeedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check baseClient->/feedback_submissions;
     io:println("All feedback submissions: ");
     io:println(allFeedbackSubmissions);
 
     // Get a feedback submission by ID
-    feedback:SimplePublicObjectWithAssociations feedbackSubmissionById = check baseClient->/feedback_submissions/["392813793683"];
+    hsfeedback:SimplePublicObjectWithAssociations feedbackSubmissionById = check baseClient->/feedback_submissions/["392813793683"];
     io:println("Feedback submission by ID: ");
     io:println(feedbackSubmissionById);
 
     // Read batch of feedback submissions
-    feedback:BatchReadInputSimplePublicObjectId batchReadInput = {
+    hsfeedback:BatchReadInputSimplePublicObjectId batchReadInput = {
         propertiesWithHistory: [
             "testFeedbackProperty"
         ],
@@ -79,7 +79,7 @@ public function main() returns error?{
         ]
     };
 
-    feedback:BatchResponseSimplePublicObject batchFeedbackSubmissions = check baseClient->/feedback_submissions/batch/read.post(batchReadInput);
+    hsfeedback:BatchResponseSimplePublicObject batchFeedbackSubmissions = check baseClient->/feedback_submissions/batch/read.post(batchReadInput);
     io:println("Batch of feedback submissions: ");
     io:println(batchFeedbackSubmissions);
 };

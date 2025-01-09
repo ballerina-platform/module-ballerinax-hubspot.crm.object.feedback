@@ -17,7 +17,7 @@
 import ballerina/test;
 import ballerina/http;
 
-final Client mockClient = check new Client(config, serviceUrl = "http://localhost:9090/crm/v3/objects");
+final Client mockClient = check new (config, serviceUrl = "http://localhost:9090/crm/v3/objects");
 
 final string mockTestFeedbackSubmissionId = "512";
 
