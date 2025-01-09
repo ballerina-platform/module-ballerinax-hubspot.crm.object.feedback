@@ -1,6 +1,10 @@
 # Examples
 
-The `ballerinax/hubspot.crm.object.feedback` connector provides practical examples illustrating usage in various scenarios.
+The `HubSpot CRM Feedback` connector provides practical examples illustrating usage in various scenarios.
+
+[Feedback Reviewing](https://github.com/module-ballerinax-hubspot.crm.object.feedback/tree/main/examples/) - This example demonstrates the usage of the HubSpot CRM Feedback connector to read a page of feedback submissions, read an object identified by `{feedbackSubmissionId}`, read a batch of feedback submissions by internal ID, or unique property values, and search feedback submissions.
+
+> **Note**: The feedback submissions endpoints are currently read only. Feedback submissions cannot be submitted or edited through the API. You can only create properties in the [feedback surveys tool within HubSpot](https://knowledge.hubspot.com/customer-feedback/create-a-custom-survey?_gl=1*1h5ce0o*_ga*MzIyODQzMTUyLjE3MzYzNjE3OTU.*_ga_LXTM6CQ0XK*MTczNjQwNjg4NS4zLjEuMTczNjQwNjg5OS40Ni4wLjA.&_ga=2.97072604.213367396.1736361795-322843152.1736361795#survey), and the properties cannot be edited after creation.
 
 ## Prerequisites
 
