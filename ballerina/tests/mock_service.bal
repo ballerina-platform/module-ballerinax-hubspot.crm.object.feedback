@@ -76,4 +76,3 @@ function init() returns error?{
     check httpListener.attach(mockService, "/");
     check httpListener.'start();
 }
-
