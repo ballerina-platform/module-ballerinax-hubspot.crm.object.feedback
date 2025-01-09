@@ -8,9 +8,9 @@
 
 ## Overview
 
-[HubSpot](https://developers.hubspot.com/docs/reference/api) is an AI-powered customer relationship management (CRM) platform.
+[HubSpot](https://developers.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/hubspot.crm.object.feedback` offers APIs to connect and interact with the [HubSpot Feedback Submission API](https://developers.hubspot.com/docs/reference/api/crm/objects/feedback-submissions) endpoints, specifically based on the [HubSpot API v3](https://developers.hubspot.com/docs/reference/api).
+The `ballerinax/hubspot.crm.object.feedback` offers APIs to connect and interact with the [HubSpot Feedback Submission API](https://developers.hubspot.com/docs/reference/api/crm/objects/feedback-submissions) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api).
 
 > **Note:** This package may be changed in the future based on the HubSpot API changes, since it is currently under development and is subject to change based on testing and feedback. By using this package, you are agreeing to accept any future changes that might occur and understand the risk associated with testing an unstable API. Refer to the [HubSpot Developer Terms](https://legal.hubspot.com/developer-terms) & [Developer Beta Terms](https://legal.hubspot.com/developerbetaterms) for more information.
 >
@@ -26,35 +26,37 @@ If you have an account already, go to the [HubSpot developer portal](https://app
 
 If you don't have a HubSpot Developer Account you can sign up to a free account [here](https://developers.hubspot.com/get-started)
 
-### Step 2 (Optional): Create a Developer Test Account
+### Step 2 (Optional): Create a [Developer Test Account](https://developers.hubspot.com/beta-docs/getting-started/account-types#developer-test-accounts) under your account
 
-Within app developer accounts, you can create a [developer test account](https://developers.hubspot.com/beta-docs/getting-started/account-types#developer-test-accounts) under your account to test apps and integrations without affecting any real HubSpot data.
+Within app developer accounts, you can create developer test accounts to test apps and integrations without affecting any real HubSpot data.
 
 > **Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
 
+### Step 2 (Optional): Create a Developer Test Account
+
 1. Go to the Test accounts section from the left sidebar.
-   ![Test accounts section](./docs/resources/test-account.png)
+   ![Test accounts section](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/test-account.png)
 
 2. Click on the `Create developer test account` button on the top right corner.
-   ![Create developer test account](./docs/resources/create-test-account.png)
+   ![Create developer test account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/create-test-account.png)
 
 3. In the pop-up window, provide a name for the test account and click on the `Create` button.
-   ![Create test account](./docs/resources/create-account.png)
+   ![Create test account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/create-account.png)
    You will see the newly created test account in the list of test accounts.
-   ![Test account portal](./docs/resources/test-account-portal.png)
+   ![Test account portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/test-account-portal.png)
 
 ### Step 3: Create a HubSpot App
 
 1. Now navigate to the `Apps` section from the left sidebar and click on the `Create app` button on the top right corner.
-   ![Create app](./docs/resources/create-app.png)
+   ![Create app](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/create-app.png)
 
 2. Provide a public app name and description for your app.
-   ![App name and description](./docs/resources/app-name-desc.png)
+   ![App name and description](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/app-name-desc.png)
 
 ### Step 4: Setup Authentication
 
 1. Move to the `Auth` tab.
-   ![Configure authentication](./docs/resources/config-auth.png)
+   ![Configure authentication](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/config-auth.png)
 
 2. In the `Scopes` section, add the following scopes for your app using the `Add new scopes` button.
    - `e-commerce`
@@ -65,16 +67,16 @@ Within app developer accounts, you can create a [developer test account](https:/
    - `crm.objects.custom.write`
    - `crm.objects.feedback_submissions.read`
 
-   ![Add scopes](./docs/resources/add-scopes.png)
+   ![Add scopes](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/add-scopes.png)
 
 3. In the `Redirect URL` section, add the redirect URL for your app. This is the URL where the user will be redirected after the authentication process. You can use `localhost` for testing purposes. Then click the `Create App` button.
 
-   ![Redirect URL](./docs/resources/redirect-url.png)
+   ![Redirect URL](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/redirect-url.png)
 
 ### Step 5: Get the Client ID and Client Secret
 
 Navigate to the `Auth` tab and you will see the `Client ID` and `Client Secret` for your app. Make sure to save these values.
-![Client ID and Client Secret](./docs/resources/client-id-secret.png)
+![Client ID and Client Secret](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/client-id-secret.png)
 
 ### Step 6: Setup Authentication Flow
 
@@ -88,7 +90,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
 2. Paste it in the browser and select your developer test account to intall the app when prompted.
-   !![Account select](./docs/resources/account-select.png)
+   !![Account select](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/account-select.png)
 
 3. A code will be displayed in the browser. Copy the code.
 
@@ -182,11 +184,7 @@ public function main() returns error? {
 
 The `HubSpot CRM Feedback` connector provides practical examples illustrating usage in various scenarios.
 
-Explore this [Feedback Reviewing Example](https://github.com/module-ballerinax-hubspot.crm.object.feedback/tree/main/examples/), covering the following use cases:
-   1. Read a page of feedback submissions.
-   2. Read an Object identified by `{feedbackSubmissionId}`
-   3. Read a batch of feedback submissions by internal ID, or unique property values
-   4. Search feedback submissions
+[Feedback Reviewing](https://github.com/module-ballerinax-hubspot.crm.object.feedback/tree/main/examples/) - This example demonstrates the usage of the HubSpot CRM Feedback connector to read a page of feedback submissions, read an Object identified by `{feedbackSubmissionId}`, read a batch of feedback submissions by internal ID, or unique property values, and search feedback submissions.
 
 > **Note**: The feedback submissions endpoints are currently read only. Feedback submissions cannot be submitted or edited through the API. You can only create properties in the [feedback surveys tool within HubSpot](https://knowledge.hubspot.com/customer-feedback/create-a-custom-survey?_gl=1*1h5ce0o*_ga*MzIyODQzMTUyLjE3MzYzNjE3OTU.*_ga_LXTM6CQ0XK*MTczNjQwNjg4NS4zLjEuMTczNjQwNjg5OS40Ni4wLjA.&_ga=2.97072604.213367396.1736361795-322843152.1736361795#survey), and the properties cannot be edited after creation.
 

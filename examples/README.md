@@ -8,7 +8,7 @@ The `ballerinax/hubspot.crm.object.feedback` connector provides practical exampl
 - **HubSpot developer account:** Create a HubSpot developer account and create an app to obtain the necessary credentials. Refer to the [Setup Guide](../ballerina/Package.md) for instructions.
 - **`hubspot.crm.object.feedback` module:** Import the `ballerinax/hubspot.crm.object.feedback` module into your Ballerina project and configure it with the obtained credentials. Refer to the [Config.toml.template](./feedback_review/Config.toml.template) file for creating the `Config.toml` file.
 
-```
+```ballerina
 import ballerinax/hubspot.crm.obj.feedback as feedback;
 
 configurable string & readonly clientId = ?;
@@ -18,9 +18,9 @@ configurable string & readonly refreshToken = ?;
 public function main() returns error?{
     feedback:ConnectionConfig config = {
         auth: {
-            clientId: clientId,
-            clientSecret: clientSecret,
-            refreshToken: refreshToken,
+            clientId,
+            clientSecret,
+            refreshToken,
             credentialBearer: oauth2:POST_BODY_BEARER
         }
     };
