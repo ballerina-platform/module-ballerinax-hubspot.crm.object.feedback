@@ -17,13 +17,11 @@
 import ballerina/http;
 import ballerina/test;
 
-final Client mockClient = check new (config, serviceUrl = "http://localhost:9090/crm/v3/objects/feedback_submissions");
-
 final string mockTestFeedbackSubmissionId = "512";
 
 @test:Config {enable: !isLiveServer}
 isolated function createFeedbackSubmission() returns error? {
-    SimplePublicObject response = check mockClient->/.post(
+    SimplePublicObject response = check baseClient->/.post(
         payload = {
             associations: [],
             properties: {
@@ -61,7 +59,7 @@ isolated function createFeedbackSubmission() returns error? {
 
 @test:Config {enable: !isLiveServer}
 isolated function updateFeedbackSubmission() returns error? {
-    SimplePublicObject response = check mockClient->/[mockTestFeedbackSubmissionId].patch(
+    SimplePublicObject response = check baseClient->/[mockTestFeedbackSubmissionId].patch(
         payload = {
             properties: {
                 "hs_content": "Wow! This is awesome!"
@@ -90,7 +88,7 @@ isolated function updateFeedbackSubmission() returns error? {
 
 @test:Config {enable: !isLiveServer}
 isolated function deleteFeedbackSubmission() returns error? {
-    http:Response response = check mockClient->/[mockTestFeedbackSubmissionId].delete();
+    http:Response response = check baseClient->/[mockTestFeedbackSubmissionId].delete();
 
     test:assertEquals(response.getTextPayload(), "Successfully deleted");
     test:assertEquals(response.statusCode, 204);

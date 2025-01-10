@@ -15,22 +15,35 @@
 // under the License.
 
 import ballerina/oauth2;
+import ballerina/os;
 import ballerina/test;
 
-configurable string & readonly clientId = ?;
-configurable string & readonly clientSecret = ?;
-configurable string & readonly refreshToken = ?;
-configurable boolean isLiveServer = ?;
+final boolean isLiveServer = os:getEnv("IS_LIVE_SERVER") == "true";
+final string serviceUrl = isLiveServer ? "https://api.hubapi.com/crm/v3/objects/feedback_submissions" : "http://localhost:9090/crm/v3/objects/feedback_submissions";
 
-OAuth2RefreshTokenGrantConfig authConfig = {
-    clientId,
-    clientSecret,
-    refreshToken,
-    credentialBearer: oauth2:POST_BODY_BEARER
-};
+final string clientId = os:getEnv("HUBSPOT_CLIENT_ID");
+final string clientSecret = os:getEnv("HUBSPOT_CLIENT_SECRET");
+final string refreshToken = os:getEnv("HUBSPOT_REFRESH_TOKEN");
 
-ConnectionConfig config = {auth: authConfig};
-final Client baseClient = check new (config);
+final Client baseClient = check initClient();
+
+isolated function initClient() returns Client|error {
+    if isLiveServer {
+        OAuth2RefreshTokenGrantConfig auth = {
+            clientId,
+            clientSecret,
+            refreshToken,
+            credentialBearer: oauth2:POST_BODY_BEARER
+        };
+        return check new ({auth}, serviceUrl);
+    }
+    return check new ({
+        auth: {
+            token: "test-token"
+        }
+    }, serviceUrl);
+}
+
 final string testFeedbackSubmissionId = "392813793683";
 final string testFeedbackProperty = "this_is_for_testing_purpose_";
 
