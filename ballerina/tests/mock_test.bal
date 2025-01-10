@@ -14,15 +14,15 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/test;
 import ballerina/http;
+import ballerina/test;
 
 final Client mockClient = check new (config, serviceUrl = "http://localhost:9090/crm/v3/objects/feedback_submissions");
 
 final string mockTestFeedbackSubmissionId = "512";
 
-@test:Config{enable: !isLiveServer}
-isolated function createFeedbackSubmission() returns error?{
+@test:Config {enable: !isLiveServer}
+isolated function createFeedbackSubmission() returns error? {
     SimplePublicObject response = check mockClient->/.post(
         payload = {
             associations: [],
@@ -40,27 +40,27 @@ isolated function createFeedbackSubmission() returns error?{
         }
     );
 
-    test:assertEquals(response,{
-        "id": "512",
-        "properties": {
-            "hs_content": "What a great product!",
-            "hs_ingestion_id": "fd61286d-102b-4fcc-b486-3486b4ceafc2",
-            "hs_response_group": "PROMOTER",
-            "hs_submission_name": "Customer Satisfaction Survey - bcooper@biglytics.net",
-            "hs_survey_channel": "EMAIL",
-            "hs_survey_id": "5",
-            "hs_survey_name": "Customer Satisfaction Survey",
-            "hs_survey_type": "CSAT",
-            "hs_value": "2"
-        },
-        "createdAt": "2019-10-30T03:30:17.883Z",
-        "updatedAt": "2019-12-07T16:50:06.678Z",
-        "archived": false
-    });
+    test:assertEquals(response, {
+                                    "id": "512",
+                                    "properties": {
+                                        "hs_content": "What a great product!",
+                                        "hs_ingestion_id": "fd61286d-102b-4fcc-b486-3486b4ceafc2",
+                                        "hs_response_group": "PROMOTER",
+                                        "hs_submission_name": "Customer Satisfaction Survey - bcooper@biglytics.net",
+                                        "hs_survey_channel": "EMAIL",
+                                        "hs_survey_id": "5",
+                                        "hs_survey_name": "Customer Satisfaction Survey",
+                                        "hs_survey_type": "CSAT",
+                                        "hs_value": "2"
+                                    },
+                                    "createdAt": "2019-10-30T03:30:17.883Z",
+                                    "updatedAt": "2019-12-07T16:50:06.678Z",
+                                    "archived": false
+                                });
 }
 
-@test:Config{enable: !isLiveServer}
-isolated function updateFeedbackSubmission() returns error?{
+@test:Config {enable: !isLiveServer}
+isolated function updateFeedbackSubmission() returns error? {
     SimplePublicObject response = check mockClient->/[mockTestFeedbackSubmissionId].patch(
         payload = {
             properties: {
@@ -69,27 +69,27 @@ isolated function updateFeedbackSubmission() returns error?{
         }
     );
 
-    test:assertEquals(response,{
-        "id": "512",
-        "properties": {
-            "hs_content": "Wow! This is awesome!",
-            "hs_ingestion_id": "fd61286d-102b-4fcc-b486-3486b4ceafc2",
-            "hs_response_group": "PROMOTER",
-            "hs_submission_name": "Customer Satisfaction Survey - bcooper@biglytics.net",
-            "hs_survey_channel": "EMAIL",
-            "hs_survey_id": "5",
-            "hs_survey_name": "Customer Satisfaction Survey",
-            "hs_survey_type": "CSAT",
-            "hs_value": "2"
-        },
-        "createdAt": "2019-10-30T03:30:17.883Z",
-        "updatedAt": "2019-12-07T16:50:06.678Z",
-        "archived": false
-    });
+    test:assertEquals(response, {
+                                    "id": "512",
+                                    "properties": {
+                                        "hs_content": "Wow! This is awesome!",
+                                        "hs_ingestion_id": "fd61286d-102b-4fcc-b486-3486b4ceafc2",
+                                        "hs_response_group": "PROMOTER",
+                                        "hs_submission_name": "Customer Satisfaction Survey - bcooper@biglytics.net",
+                                        "hs_survey_channel": "EMAIL",
+                                        "hs_survey_id": "5",
+                                        "hs_survey_name": "Customer Satisfaction Survey",
+                                        "hs_survey_type": "CSAT",
+                                        "hs_value": "2"
+                                    },
+                                    "createdAt": "2019-10-30T03:30:17.883Z",
+                                    "updatedAt": "2019-12-07T16:50:06.678Z",
+                                    "archived": false
+                                });
 }
 
-@test:Config{enable: !isLiveServer}
-isolated function deleteFeedbackSubmission() returns error?{
+@test:Config {enable: !isLiveServer}
+isolated function deleteFeedbackSubmission() returns error? {
     http:Response response = check mockClient->/[mockTestFeedbackSubmissionId].delete();
 
     test:assertEquals(response.getTextPayload(), "Successfully deleted");

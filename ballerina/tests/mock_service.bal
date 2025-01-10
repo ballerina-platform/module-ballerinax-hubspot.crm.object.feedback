@@ -17,11 +17,11 @@
 import ballerina/http;
 import ballerina/log;
 
-listener http:Listener httpListener = new(9090);
+listener http:Listener httpListener = new (9090);
 
 http:Service mockService = service object {
     // Create feedback submission
-    resource function post crm/v3/objects/feedback_submissions(@http:Payload SimplePublicObjectInputForCreate payload) returns SimplePublicObject|error{
+    resource function post crm/v3/objects/feedback_submissions(@http:Payload SimplePublicObjectInputForCreate payload) returns SimplePublicObject|error {
         return {
             "id": "512",
             "properties": {
@@ -43,7 +43,7 @@ http:Service mockService = service object {
 
     // Update feedback submission
     resource function patch crm/v3/objects/feedback_submissions/[string feedbackSubmissionId](@http:Payload SimplePublicObjectInput payload) returns SimplePublicObject|error {
-        return{
+        return {
             "id": "512",
             "properties": {
                 "hs_content": "Wow! This is awesome!",
@@ -59,7 +59,7 @@ http:Service mockService = service object {
             "createdAt": "2019-10-30T03:30:17.883Z",
             "updatedAt": "2019-12-07T16:50:06.678Z",
             "archived": false
-            };
+        };
     }
 
     // Delete a feedback submission
@@ -71,8 +71,8 @@ http:Service mockService = service object {
     }
 };
 
-function init() returns error?{
-    if isLiveServer{
+function init() returns error? {
+    if isLiveServer {
         log:printInfo("Skipping mock service initialization. Tests are configured to run against live server.");
         return;
     }
