@@ -10,7 +10,7 @@
 
 [HubSpot](https://developers.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/hubspot.crm.object.feedback` offers APIs to connect and interact with the [HubSpot Feedback Submission API](https://developers.hubspot.com/docs/reference/api/crm/objects/feedback-submissions) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api).
+The `ballerinax/hubspot.crm.obj.feedback` offers APIs to connect and interact with the [HubSpot Feedback Submission API](https://developers.hubspot.com/docs/reference/api/crm/objects/feedback-submissions) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api).
 
 > **Note:** This package may be changed in the future based on the HubSpot API changes, since it is currently under development and is subject to change based on testing and feedback. By using this package, you are agreeing to accept any future changes that might occur and understand the risk associated with testing an unstable API. Refer to the [HubSpot Developer Terms](https://legal.hubspot.com/developer-terms) & [Developer Beta Terms](https://legal.hubspot.com/developerbetaterms) for more information.
 >
@@ -267,7 +267,7 @@ All the contributors are encouraged to read the [Ballerina Code of Conduct](http
 
 ## Useful links
 
-* For more information go to the [`hubspot.crm.object.feedback` package](https://central.ballerina.io/ballerinax/hubspot.crm.object.feedback/latest).
+* For more information go to the [`hubspot.crm.obj.feedback` package](https://central.ballerina.io/ballerinax/hubspot.crm.object.feedback/latest).
 * For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 * Chat live with us via our [Discord server](https://discord.gg/ballerinalang).
 * Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
