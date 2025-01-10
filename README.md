@@ -79,7 +79,7 @@ Navigate to the `Auth` tab and you will see the `Client ID` and `Client Secret` 
 
 ### Step 6: Setup Authentication Flow
 
-Before proceeding with the Quickstart, ensure you have obtained the Access Token using the following steps:
+Before proceeding with the Quickstart, ensure you have obtained the Access Token or Refresh Token using the following steps:
 
 1. Create an authorization URL using the following format:
 
@@ -88,7 +88,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
    ```
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
-2. Paste it in the browser and select your developer test account to intall the app when prompted.
+2. Paste it in the browser and select your developer test account to install the app when prompted.
    ![Account select](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/main/docs/resources/account-select.png)
 
 3. A code will be displayed in the browser. Copy the code.
@@ -112,7 +112,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
      --data 'grant_type=authorization_code&code=<CODE>&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
      ```
 
-   This command will return the access token necessary for API calls.
+   This command will return the access token and refresh token which are necessary for API calls.
 
    ```json
    {
@@ -122,7 +122,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
      "expires_in": 1800
    }
    ```
-5. Store the access token securely for use in your application.
+5. Store the refresh token securely for use in your application.
 
 ## Quickstart
 
