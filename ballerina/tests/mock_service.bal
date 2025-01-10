@@ -72,7 +72,11 @@ http:Service mockService = service object {
 };
 
 function init() returns error?{
-    log:printInfo("Initializing mock service");
+    if isLiveServer{
+        log:printInfo("Skipping mock service initialization. Tests are configured to run against live server.");
+        return;
+    }
+    log:printInfo("Tests are configured to run against mock server. Initializing mock service...");
     check httpListener.attach(mockService, "/");
     check httpListener.'start();
 }

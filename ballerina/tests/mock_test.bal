@@ -21,7 +21,7 @@ final Client mockClient = check new (config, serviceUrl = "http://localhost:9090
 
 final string mockTestFeedbackSubmissionId = "512";
 
-@test:Config{}
+@test:Config{enable: !isLiveServer}
 isolated function createFeedbackSubmission() returns error?{
     SimplePublicObject response = check mockClient->/.post(
         payload = {
@@ -59,7 +59,7 @@ isolated function createFeedbackSubmission() returns error?{
     });
 }
 
-@test:Config{}
+@test:Config{enable: !isLiveServer}
 isolated function updateFeedbackSubmission() returns error?{
     SimplePublicObject response = check mockClient->/[mockTestFeedbackSubmissionId].patch(
         payload = {
@@ -88,7 +88,7 @@ isolated function updateFeedbackSubmission() returns error?{
     });
 }
 
-@test:Config{}
+@test:Config{enable: !isLiveServer}
 isolated function deleteFeedbackSubmission() returns error?{
     http:Response response = check mockClient->/[mockTestFeedbackSubmissionId].delete();
 

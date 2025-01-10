@@ -20,6 +20,7 @@ import ballerina/oauth2;
 configurable string & readonly clientId = ?;
 configurable string & readonly clientSecret = ?;
 configurable string & readonly refreshToken = ?;
+configurable boolean isLiveServer = ?;
 
 OAuth2RefreshTokenGrantConfig authConfig = {
     clientId,
@@ -33,13 +34,13 @@ final Client baseClient = check new (config);
 final string testFeedbackSubmissionId = "392813793683";
 final string testFeedbackProperty = "this_is_for_testing_purpose_";
 
-@test:Config {}
+@test:Config {enable: isLiveServer}
 isolated function getPageOfFeedbackSubmissions() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/;
     test:assertTrue(response?.results.length()>=0);
 }
 
-@test:Config {}
+@test:Config {enable: isLiveServer}
 isolated function  getFeedbackSubmissionById() returns error? { 
     SimplePublicObjectWithAssociations response = check baseClient->/[testFeedbackSubmissionId];
     test:assertEquals(response?.properties,
@@ -51,7 +52,7 @@ isolated function  getFeedbackSubmissionById() returns error? {
         );
 }
 
-@test:Config {}
+@test:Config {enable: isLiveServer}
 isolated function  searchFeedbackSubmissions() returns error?{
     CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/search.post(
         payload = {
@@ -70,7 +71,7 @@ isolated function  searchFeedbackSubmissions() returns error?{
 }
 
 
-@test:Config {}
+@test:Config {enable: isLiveServer}
 isolated function  readBacthOfFeedback() returns error?{
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check baseClient->/batch/read.post(
         payload = {
