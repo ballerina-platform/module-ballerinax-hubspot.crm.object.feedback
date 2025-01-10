@@ -35,13 +35,13 @@ final string testFeedbackProperty = "this_is_for_testing_purpose_";
 
 @test:Config {}
 isolated function getPageOfFeedbackSubmissions() returns error? {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/feedback_submissions;
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/;
     test:assertTrue(response?.results.length()>=0);
 }
 
 @test:Config {}
 isolated function  getFeedbackSubmissionById() returns error? { 
-    SimplePublicObjectWithAssociations response = check baseClient->/feedback_submissions/[testFeedbackSubmissionId];
+    SimplePublicObjectWithAssociations response = check baseClient->/[testFeedbackSubmissionId];
     test:assertEquals(response?.properties,
             {   
                 "hs_createdate": "2024-12-22T07:28:21.099Z",
@@ -53,7 +53,7 @@ isolated function  getFeedbackSubmissionById() returns error? {
 
 @test:Config {}
 isolated function  searchFeedbackSubmissions() returns error?{
-    CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/feedback_submissions/search.post(
+    CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/search.post(
         payload = {
             "filterGroups": [
                 {"filters": [
@@ -72,7 +72,7 @@ isolated function  searchFeedbackSubmissions() returns error?{
 
 @test:Config {}
 isolated function  readBacthOfFeedback() returns error?{
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check baseClient->/feedback_submissions/batch/read.post(
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check baseClient->/batch/read.post(
         payload = {
             "propertiesWithHistory": [
                 testFeedbackProperty

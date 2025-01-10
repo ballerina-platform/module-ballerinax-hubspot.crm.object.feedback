@@ -19,7 +19,7 @@
     "x-hubspot-introduction" : "Use the feedback submissions API to retrieve information submitted to your NPS, CSAT, CES, and custom feedback surveys."
   },
   "servers" : [ {
-    "url" : "https://api.hubapi.com/crm/v3/objects"
+    "url" : "https://api.hubapi.com/crm/v3/objects/feedback_submissions"
   } ],
   "tags" : [ {
     "name" : "Batch"
@@ -29,7 +29,7 @@
     "name" : "Search"
   } ],
   "paths" : {
-    "/feedback_submissions/batch/read" : {
+    "/batch/read" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Read a batch of feedback submissions by internal ID, or unique property values",
@@ -88,7 +88,7 @@
         } ]
       }
     },
-    "/feedback_submissions/{feedbackSubmissionId}" : {
+    "/{feedbackSubmissionId}" : {
       "get" : {
         "tags" : [ "Basic" ],
         "summary" : "Read",
@@ -272,7 +272,7 @@
         } ]
       }
     },
-    "/feedback_submissions/batch/archive" : {
+    "/batch/archive" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Archive a batch of feedback submissions by ID",
@@ -304,7 +304,7 @@
         } ]
       }
     },
-    "/feedback_submissions/batch/create" : {
+    "/batch/create" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Create a batch of feedback submissions",
@@ -352,7 +352,7 @@
         } ]
       }
     },
-    "/feedback_submissions/batch/update" : {
+    "/batch/update" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Update a batch of feedback submissions",
@@ -400,7 +400,7 @@
         } ]
       }
     },
-    "/feedback_submissions" : {
+    "/" : {
       "get" : {
         "tags" : [ "Basic" ],
         "summary" : "List",
@@ -538,7 +538,7 @@
         } ]
       }
     },
-    "/feedback_submissions/batch/upsert" : {
+    "/batch/upsert" : {
       "post" : {
         "tags" : [ "Batch" ],
         "summary" : "Create or update a batch of feedback submissions by unique property values",
@@ -586,7 +586,7 @@
         } ]
       }
     },
-    "/feedback_submissions/search" : {
+    "/search" : {
       "post" : {
         "tags" : [ "Search" ],
         "operationId" : "post-/crm/v3/objects/feedback_submissions/search_doSearch",
