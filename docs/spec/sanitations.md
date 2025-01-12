@@ -24,7 +24,7 @@ These changes are done in order to improve the overall usability, and as workaro
 
   - **Original**: ``/crm/v3/objects/feedback_submissions/batch/read``
   - **Updated**: ``/batch/read``
-- **Reason**:  This change simplifies the API p aths, making them shorter and more readable.
+- **Reason**:  This change simplifies the API paths, making them shorter and more readable.
 
 ## OpenAPI cli command
 
