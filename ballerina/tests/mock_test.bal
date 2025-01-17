@@ -95,7 +95,7 @@ isolated function updateFeedbackSubmission() returns error? {
 @test:Config {
     enable: !isLiveServer,
     groups: ["mock_service_test"]
-    }
+}
 isolated function deleteFeedbackSubmission() returns error? {
     http:Response response = check baseClient->/[mockTestFeedbackSubmissionId].delete();
 

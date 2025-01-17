@@ -18,9 +18,9 @@ import ballerinax/hubspot.crm.obj.feedback as hsfeedback;
 import ballerina/oauth2;
 import ballerina/io;
 
-configurable string & readonly clientId = ?;
-configurable string & readonly clientSecret = ?;
-configurable string & readonly refreshToken = ?;
+configurable string clientId = ?;
+configurable string clientSecret = ?;
+configurable string refreshToken = ?;
 
 // Create a new client using the provided configuration
 hsfeedback:ConnectionConfig config = {
