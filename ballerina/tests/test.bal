@@ -47,13 +47,19 @@ isolated function initClient() returns Client|error {
 final string testFeedbackSubmissionId = "392813793683";
 final string testFeedbackProperty = "this_is_for_testing_purpose_";
 
-@test:Config {enable: isLiveServer}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+    }
 isolated function getPageOfFeedbackSubmissions() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check baseClient->/;
     test:assertTrue(response?.results.length() >= 0);
 }
 
-@test:Config {enable: isLiveServer}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+    }
 isolated function getFeedbackSubmissionById() returns error? {
     SimplePublicObjectWithAssociations response = check baseClient->/[testFeedbackSubmissionId];
     test:assertEquals(response?.properties,
@@ -65,7 +71,10 @@ isolated function getFeedbackSubmissionById() returns error? {
         );
 }
 
-@test:Config {enable: isLiveServer}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+    }
 isolated function searchFeedbackSubmissions() returns error? {
     CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/search.post(
         payload = {
@@ -86,7 +95,10 @@ isolated function searchFeedbackSubmissions() returns error? {
     test:assertTrue(response?.results.length() <= 3);
 }
 
-@test:Config {enable: isLiveServer}
+@test:Config {
+    enable: isLiveServer,
+    groups: ["live_service_test"]
+    }
 isolated function readBacthOfFeedback() returns error? {
     BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check baseClient->/batch/read.post(
         payload = {

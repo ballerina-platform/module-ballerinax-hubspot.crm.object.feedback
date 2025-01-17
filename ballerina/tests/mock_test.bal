@@ -19,7 +19,10 @@ import ballerina/test;
 
 final string mockTestFeedbackSubmissionId = "512";
 
-@test:Config {enable: !isLiveServer}
+@test:Config {
+    enable: !isLiveServer,
+    groups: ["mock_service_test"]
+    }
 isolated function createFeedbackSubmission() returns error? {
     SimplePublicObject response = check baseClient->/.post(
         payload = {
@@ -57,7 +60,10 @@ isolated function createFeedbackSubmission() returns error? {
                                 });
 }
 
-@test:Config {enable: !isLiveServer}
+@test:Config {
+    enable: !isLiveServer,
+    groups: ["mock_service_test"]
+    }
 isolated function updateFeedbackSubmission() returns error? {
     SimplePublicObject response = check baseClient->/[mockTestFeedbackSubmissionId].patch(
         payload = {
@@ -86,7 +92,10 @@ isolated function updateFeedbackSubmission() returns error? {
                                 });
 }
 
-@test:Config {enable: !isLiveServer}
+@test:Config {
+    enable: !isLiveServer,
+    groups: ["mock_service_test"]
+    }
 isolated function deleteFeedbackSubmission() returns error? {
     http:Response response = check baseClient->/[mockTestFeedbackSubmissionId].delete();
 
