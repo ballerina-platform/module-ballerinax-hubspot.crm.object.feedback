@@ -32,7 +32,7 @@ hsfeedback:ConnectionConfig config = {
     }
 };
 
-final hsfeedback:Client baseClient = check new (config);
+final hsfeedback:Client feedbackClient = check new (config);
 
 public function main() returns error?{
     // Search for feedback submissions
@@ -51,21 +51,21 @@ public function main() returns error?{
         ]
     };
 
-    hsfeedback:CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check baseClient->/feedback_submissions/search.post(searchRequest);
+    hsfeedback:CollectionResponseWithTotalSimplePublicObjectForwardPaging response = check feedbackClient->/feedback_submissions/search.post(searchRequest);
     io:println("Feedback submissions found: ");
     io:println(response);
 
     // Get a page of feedback submissions
     // Here, we have set the maximum number of feedback submissions to be retrieved per page to 2.
     // Also, the paging cursor token of the last successfully read resource will be returned as the paging.next.after JSON property of a paged response containing more results.
-    hsfeedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check baseClient->/feedback_submissions('limit = 2);
+    hsfeedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging allFeedbackSubmissions = check feedbackClient->/feedback_submissions('limit = 2);
     io:println("All feedback submissions: ");
     io:println(allFeedbackSubmissions);
 
     // Get a feedback submission by ID
     // {feedbackSubmissionId} refers to the internal object ID by default, or optionally any unique property value as specified by the idProperty query param. 
     // Control what is returned via the properties query param.
-    hsfeedback:SimplePublicObjectWithAssociations feedbackSubmissionId = check baseClient->/feedback_submissions/["392813793683"];
+    hsfeedback:SimplePublicObjectWithAssociations feedbackSubmissionId = check feedbackClient->/feedback_submissions/["392813793683"];
     io:println("Feedback submission by ID: ");
     io:println(feedbackSubmissionId);
 
@@ -89,7 +89,7 @@ public function main() returns error?{
         ]
     };
 
-    hsfeedback:BatchResponseSimplePublicObject batchFeedbackSubmissions = check baseClient->/feedback_submissions/batch/read.post(batchReadInput);
+    hsfeedback:BatchResponseSimplePublicObject batchFeedbackSubmissions = check feedbackClient->/feedback_submissions/batch/read.post(batchReadInput);
     io:println("Batch of feedback submissions: ");
     io:println(batchFeedbackSubmissions);
 };
