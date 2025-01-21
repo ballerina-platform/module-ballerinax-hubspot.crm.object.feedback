@@ -24,7 +24,7 @@ plugins {
 
 description = 'HubSpot CRM Feedback - Ballerina'
 
-def packageName = "hubspot.crm.object.feedback"
+def packageName = "hubspot.crm.obj.feedback"
 def packageOrg = "ballerinax"
 def tomlVersion = stripBallerinaExtensionVersion("${project.version}")
 def ballerinaTomlFilePlaceHolder = new File("${project.rootDir}/build-config/resources/Ballerina.toml")

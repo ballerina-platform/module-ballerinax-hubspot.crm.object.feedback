@@ -29,9 +29,9 @@ plugins {
 
 rootProject.name = 'module-ballerinax-hubspot.crm.object.feedback'
 
-include ':hubspot.crm.object.feedback-ballerina'
+include ':hubspot.crm.obj.feedback-ballerina'
 
-project(':hubspot.crm.object.feedback-ballerina').projectDir = file("ballerina")
+project(':hubspot.crm.obj.feedback-ballerina').projectDir = file("ballerina")
 
 gradleEnterprise {
     buildScan {

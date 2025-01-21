@@ -171,7 +171,7 @@ import ballerina/oauth2;
 Now, utilize the available connector operations. A sample usecase is shown below.
 
 #### View Submitted Feedbacks
-    
+
 ```ballerina
 public function main() returns error? {
    hsfeedback:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging getPageOfFeedbackSubmissions = check baseClient->/feedback_submissions('limit = 10);
@@ -267,7 +267,8 @@ All the contributors are encouraged to read the [Ballerina Code of Conduct](http
 
 ## Useful links
 
-* For more information go to the [`hubspot.crm.obj.feedback` package](https://central.ballerina.io/ballerinax/hubspot.crm.object.feedback/latest).
+* For more information go to the [`hubspot.crm.obj.feedback` package](https://central.ballerina.io/ballerinax/hubspot.crm.obj.feedback/latest).
 * For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 * Chat live with us via our [Discord server](https://discord.gg/ballerinalang).
-* Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
+* Post all technical questions on Stack Overflow with the
+  [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
