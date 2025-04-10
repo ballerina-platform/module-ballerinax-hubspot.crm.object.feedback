@@ -63,10 +63,9 @@ http:Service mockService = service object {
     }
 
     // Delete a feedback submission
-    resource function delete crm/v3/objects/feedback_submissions/[string feedbackSubmissionId]() returns http:Response|error {
+    resource function delete crm/v3/objects/feedback_submissions/[string feedbackSubmissionId]() returns http:Response {
         http:Response response = new;
         response.statusCode = 204;
-        response.setPayload("Successfully deleted");
         return response;
     }
 };

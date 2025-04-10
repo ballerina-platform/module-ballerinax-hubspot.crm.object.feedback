@@ -14,7 +14,6 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
 import ballerina/test;
 
 final string mockTestFeedbackSubmissionId = "512";
@@ -22,7 +21,7 @@ final string mockTestFeedbackSubmissionId = "512";
 @test:Config {
     enable: !isLiveServer,
     groups: ["mock_service_test"]
-    }
+}
 isolated function createFeedbackSubmission() returns error? {
     SimplePublicObject response = check baseClient->/.post(
         payload = {
@@ -63,7 +62,7 @@ isolated function createFeedbackSubmission() returns error? {
 @test:Config {
     enable: !isLiveServer,
     groups: ["mock_service_test"]
-    }
+}
 isolated function updateFeedbackSubmission() returns error? {
     SimplePublicObject response = check baseClient->/[mockTestFeedbackSubmissionId].patch(
         payload = {
@@ -97,8 +96,6 @@ isolated function updateFeedbackSubmission() returns error? {
     groups: ["mock_service_test"]
 }
 isolated function deleteFeedbackSubmission() returns error? {
-    http:Response response = check baseClient->/[mockTestFeedbackSubmissionId].delete();
-
-    test:assertEquals(response.getTextPayload(), "Successfully deleted");
-    test:assertEquals(response.statusCode, 204);
+    error? response = baseClient->/[mockTestFeedbackSubmissionId].delete();
+    test:assertTrue(response is ());
 }
